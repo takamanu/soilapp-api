@@ -1,19 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/User');
+const router = require("express").Router();
+const { getUsers, getUserByJwt, getUserById } = require("../controller/user");
 
-const getAllUsers = async () => {
-    return await User.findAll();
-};
-
-
-
-router.get('/users', function(req, res) {
-    getAllUsers().then(user => res.json(user));
-});
-
-
+router.get("/", getUsers);
+router.get("/profile", getUserByJwt);
+router.get("/:id", getUserById);
 
 module.exports = router;
-
-
